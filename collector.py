@@ -10,7 +10,7 @@ logging.basicConfig(
 
 
 def dump_projects(iam_iterator):
-    with open('projects.csv', 'wb') as csvfile:
+    with open('projects.csv', 'w') as csvfile:
         writer = csv.writer(csvfile)
         for counter, project in enumerate(iam_iterator.list_projects()):
             project_id = project['projectId']
@@ -21,7 +21,7 @@ def dump_projects(iam_iterator):
 
 
 def dump_projects_iam(iam_iterator):
-    with open('projects_iam.csv', 'wb') as csvfile:
+    with open('projects_iam.csv', 'w') as csvfile:
         writer = csv.writer(csvfile)
         for counter, project in enumerate(iam_iterator.list_projects()):
             project_id = project['projectId']
@@ -37,7 +37,7 @@ def dump_projects_iam(iam_iterator):
 
 
 def dump_service_accounts(iam_iterator):
-    with open('serviceAccounts.csv', 'wb') as csvfile:
+    with open('serviceAccounts.csv', 'w') as csvfile:
         writer = csv.writer(csvfile)
         for counter, project in enumerate(iam_iterator.list_projects()):
             project_id = project['projectId']
@@ -61,7 +61,7 @@ def dump_service_accounts(iam_iterator):
 
 
 def dump_datasets_iam(iam_iterator):
-    with open('datasets_iam.csv', 'wb') as csvfile:
+    with open('datasets_iam.csv', 'w') as csvfile:
         writer = csv.writer(csvfile)
         for counter, project in enumerate(iam_iterator.list_projects()):
             project_id = project['projectId']
@@ -84,7 +84,7 @@ def dump_datasets_iam(iam_iterator):
 
 
 def dump_buckets_iam(iam_iterator):
-    with open('buckets_iam.csv', 'wb') as csvfile:
+    with open('buckets_iam.csv', 'w') as csvfile:
         writer = csv.writer(csvfile)
         for counter, project in enumerate(iam_iterator.list_projects()):
             project_id = project['projectId']
