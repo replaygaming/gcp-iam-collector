@@ -92,20 +92,22 @@ def dump_buckets_iam(iam_iterator):
                          .format(counter, project_id))
             for bucket in iam_iterator.list_buckets(project_id):
                 bucket_id = bucket['id']
-                for access in iam_iterator.list_bucket_access(
-                        bucket_id=bucket_id):
-                    role = access['role']
-                    entity = access['entity']
-                    if 'projectTeam' in access:
-                        member_type = access['projectTeam']['team']
-                    else:
-                        member_type = entity.split('-')[0]
-                    member = entity.split('-', 1)[
-                        1] if '-' in entity else entity
-                    writer.writerow(
-                        [project_id, project['projectNumber'], bucket_id, role,
-                         member_type, member,
-                         entity])
+                # workaround "Cannot get legacy ACL for a bucket that has uniform bucket-level access" error
+                if 'archive' not in bucket_id and 'cloudflare' not in bucket_id and 'flags' not in bucket_id and 'fonts' not in bucket_id and 'landing' not in bucket_id:
+                  for access in iam_iterator.list_bucket_access(
+                          bucket_id=bucket_id):
+                      role = access['role']
+                      entity = access['entity']
+                      if 'projectTeam' in access:
+                          member_type = access['projectTeam']['team']
+                      else:
+                          member_type = entity.split('-')[0]
+                      member = entity.split('-', 1)[
+                          1] if '-' in entity else entity
+                      writer.writerow(
+                          [project_id, project['projectNumber'], bucket_id, role,
+                           member_type, member,
+                           entity])
 
 
 if __name__ == '__main__':
